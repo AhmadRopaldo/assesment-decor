@@ -31,7 +31,7 @@ class ProdukController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
-
+       // $produk = \App\Models\Produk::create($request->all());
         $produk = Produk::create($request->all());
         return response()->json(['message' => 'Produk berhasil ditambahkan', 'data' => $produk], 201);
     }
