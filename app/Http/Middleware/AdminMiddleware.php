@@ -17,12 +17,20 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::guard('admin')->check()) {
-            return $next($request);
+
+        // Cek apakah user sudah login
+        if (!Auth::check()) {
+            return redirect('/login');
         }
 
-        AuthController::logout();
+        // DEBUG: Hapus kode ini setelah berhasil
+        // Ini akan menampilkan isi ROLE Anda di layar hitam
+        // dd(Auth::user()->role); 
 
-        return redirect('/login');
+        if (Auth::user()->role !== 'admin') {
+            return redirect('/')->with('error', 'Anda bukan admin, role anda: ' . Auth::user()->role);
+        }
+
+        return $next($request);
     }
 }

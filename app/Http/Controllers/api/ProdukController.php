@@ -22,9 +22,10 @@ class ProdukController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nama'      => 'required',
+            'nama' => 'required',
             'deskripsi' => 'required',
             'harga'     => 'required|numeric',
+            'stok'      => 'required|integer',
         ]);
 
         if ($validator->fails()) {

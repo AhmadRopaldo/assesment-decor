@@ -34,7 +34,7 @@ class AuthController extends Controller
         }
 
         return back()->withErrors([
-            'name' => 'asddf',
+            'name' => 'admin_decor',
         ])->onlyInput('name');
     }
 
